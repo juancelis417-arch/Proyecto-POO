@@ -1,3 +1,3 @@
 # Videojuego_Orbit
 
-[Ver Documentos](Juegos-POO.txt)
+[Ver Documentos](Entregable1_Videojuego.pdf)
