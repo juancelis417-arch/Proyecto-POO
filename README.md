@@ -1,3 +1,3 @@
 # Videojuego_Orbit
 
-[Ver Documento](Entregable1_Videojuego.pdf)
+[Ver Descargas](Entregable1_Videojuego.pdf)
