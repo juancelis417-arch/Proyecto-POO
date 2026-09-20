@@ -1,3 +1,3 @@
 # Videojuego_Orbit
 
-[Ver Documentos](Certificado Bancario.pdf)
+[Ver Documentos](Juegos-POO.txt)
