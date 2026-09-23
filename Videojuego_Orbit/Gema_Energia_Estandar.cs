@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,32 +8,57 @@ namespace Videojuego_Orbit
 {
     internal class Gema_Energia_Estandar
     {
+        // Atributos
         int posicion;
         int valor_Puntos;
-        int estado; // true = si esta recolectado, false = no esta recolectada
+        bool estado; // false = no recolectada, true = recolectada
 
-
-        public int Posicion { get => posicion; private set => posicion = value; }
-        public int Valor_Puntos { get => valor_Puntos; private set => valor_Puntos = value; }
-        public int Estado { get => estado; private set => estado = value; }
-
-        public Gema_Energia_Estandar(int puntos)
+        // Constructor
+        public Gema_Energia_Estandar(int posicionInicial, int puntos)
         {
-            this.posicion = 0;
+            this.posicion = posicionInicial;
             this.valor_Puntos = puntos;
-            this.estado = 50;
+            this.estado = false;
         }
 
-        public void mover(int posicionactual)
+        // Propiedades
+        public int Posicion
         {
-            posicion = posicionactual;
+            get => posicion;
+            private set => posicion = value;
         }
 
-        public void aumentarestado(int cantidad)
+        public int Valor_Puntos
         {
-          
-            estado += cantidad; // para aumentar si esta recolectada  
+            get => valor_Puntos;
+            private set => valor_Puntos = value;
         }
+
+        public bool Estado
+        {
+            get => estado;
+            private set => estado = value;
+        }
+
+        // Método para recolectar la gema
+        public void Recolectar()
+        {
+            estado = true;
+        }
+
+        // Método para verificar si la gema fue recolectada
+        public bool EstaRecolectada()
+        {
+            return estado;
+        }
+
+        // La gema desaparece del mapa
+        public void Desaparecer()
+        {
+            posicion = -1;
+        }
+    }
+}
 
         public bool Estadocapacidad()
         {
