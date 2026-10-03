@@ -1,5 +1,9 @@
 # Videojuego_Orbit
 
+-Emmanuel Restrepo
+-Juan Celis
+-Cristian Rojo
+
 En este documento se encuentra el proyecto o formato que compartió el grupo de Orbit: [Ver Documentos](Entregable1_Videojuego.pdf)
 
 --------------------------------------------------------------------------------------------------------------------------------------
