@@ -1,61 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Videojuego_Orbit
 {
-    internal class Dron_Cazador__Tipo_B
+    internal class Dron_Cazador__Tipo_B : Dron
     {
-        int posicion;
-        int velocidad;
-        int posicionObjeto;//posicion objeto orbit
-        int estado;
+        // Atributo propio del Dron Cazador
+        int posicionObjeto; // Posición de ORBIT
 
+        // Constructor
         public Dron_Cazador__Tipo_B(int posicionInicial)
+            : base(posicionInicial, 20)
         {
-            this.posicion = posicionInicial;
-            this.velocidad = 20;
-            this.posicionObjeto = 2; //indicar al equipo donde se van a encontar las pocicion del objeto
-            this.estado = 50;
+            this.posicionObjeto = 2;
         }
 
-
-
-
-        public int Posicion { get => posicion; private set => posicion = value; }
-        public int Velocidad { get => velocidad; private set => velocidad = value; }
-        public int PosicionObjeto { get => posicionObjeto; private set => posicionObjeto = value; }
-        public int Estado { get => estado; private set => estado = value; }
-
-
-        public void mover(int posicionactual)
+        // Propiedad propia del Cazador
+        public int PosicionObjeto
         {
-            posicion = posicionactual;
+            get => posicionObjeto;
+            private set => posicionObjeto = value;
         }
 
-        public void velocidadbaja(int nuevaVelocidad)
-        {
-            velocidad = nuevaVelocidad;
-        }
-
+        // Actualiza la posición de ORBIT
         public void calcularDireccion(int nuevaPosicionOrbit)
         {
             posicionObjeto = nuevaPosicionOrbit;
         }
 
-        public bool Estadocapacidad()
+        // Polimorfismo:
+        // El Cazador se mueve persiguiendo a ORBIT
+        public override string Mover(int posicionActual)
         {
-            if (estado > 1) // si esta activo, aumenta 
-                return true;
-            else
-                return false;// sino esta desactivado, no esta recogida
+            posicion = posicionActual;
+
+            return "El Dron Cazador se mueve hacia ORBIT en la posición: "
+                   + posicionObjeto;
         }
-
-
-
-
     }
 }
