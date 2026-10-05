@@ -1,55 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Videojuego_Orbit
 {
-    internal class Dron_Centinela_Tipo_A
+    internal class Dron_Centinela_Tipo_A : Dron
     {
-        int posicion;
+        // Atributo propio del Centinela
         string rutaPatrulla;
-        int velocidad;
-        int estado;
-    
+
+        // Constructor
         public Dron_Centinela_Tipo_A()
+            : base(1, 20)
         {
-            this.posicion = 1;
-            this.rutaPatrulla = "Sin Asingnar"; // no sabemos la ruta de la patrulla
-            this.velocidad = 20;
-            this.estado = 50;
+            rutaPatrulla = "Sin Asignar";
         }
 
-        public int Posicion { get => posicion; private set => posicion = value; }
-        public string RutaPatrulla { get => rutaPatrulla; private set => rutaPatrulla = value; }
-        public int Velocidad { get => velocidad; private set => velocidad = value; }
-        public int Estado { get => estado; private set => estado = value; }
-
-
-        public void mover(int posicionactual)
+        // Propiedad
+        public string RutaPatrulla
         {
-            posicion = posicionactual;
+            get => rutaPatrulla;
+            private set => rutaPatrulla = value;
         }
 
+        // Asignar la ruta que va a patrullar
         public void AsignarRuta(string ruta)
         {
             rutaPatrulla = ruta;
         }
 
-        public void velocidadbaja(int nuevaVelocidad)
+        // Polimorfismo:
+        // El Centinela se mueve patrullando una ruta fija
+        public override string Mover(int posicionActual)
         {
-            velocidad = nuevaVelocidad;
+            posicion = posicionActual;
+
+            return "El Dron Centinela se mueve por la ruta: "
+                   + rutaPatrulla;
         }
-
-
-        public bool Estadocapacidad()
-        {
-            if (estado > 1) // si esta activo, aumenta 
-                return true;
-            else
-                return false;// sino esta desactivado, no esta recogida
-        }
-
+    }
+}
     }
 }
