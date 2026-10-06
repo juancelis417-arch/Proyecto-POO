@@ -66,12 +66,6 @@ namespace VideoJuego_Orbit
             
                 
 
-        public void Tiemporesta(int tiempo)
-        {
-            tiempoRestante -= tiempo;
-            if (tiempoRestante < 0)
-                tiempoRestante = 0;
-        }
 
 
     }
