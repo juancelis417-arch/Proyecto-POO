@@ -32,8 +32,24 @@ namespace VideoJuego_Orbit
             Console.WriteLine("---- Posicion del jugador ----");
             Console.WriteLine("PosicionX: " + jugador.PosicionX);
             Console.WriteLine("PosicionY: " + jugador.PosicionY);
-            Console.WriteLine($"Posicion en plano Cartesiano:  + ({jugador.PosicionX},{jugador.PosicionY}");
+            Console.WriteLine($"Posicion en plano Cartesiano: ({jugador.PosicionX},{jugador.PosicionY})");
             Console.WriteLine();
+
+
+            Console.WriteLine("Simulación del movimiento circular de ORBIT");
+            Console.WriteLine("Posiciones:");
+
+            
+
+            Console.WriteLine("Simulación movimiento circular de ORBIT");
+
+            jugador.movimiento();
+
+            Console.WriteLine("Simulación terminada");
+
+
+
+
 
 
             // Se prueba sumar puntos

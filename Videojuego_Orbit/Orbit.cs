@@ -26,7 +26,16 @@ namespace VideoJuego_Orbit
         public int tiempoTotalSegundos;
         public int minutos;
         public int segundos;
+        double posicion;
 
+        // Posicion del orbit
+        public double centroX = 200;
+        public double centroY = 200;
+        public double radio = 150;
+        public double angulo = 0;
+
+        public double x;
+        public double y;
 
         // Constructor 
 
@@ -40,6 +49,7 @@ namespace VideoJuego_Orbit
             this.tiempoPorPartida = 60;
             this.altura = 5;
             this.velocidad = 10;
+
 
 
 
@@ -89,10 +99,33 @@ namespace VideoJuego_Orbit
 
         }
 
+        public void movimiento()
+        {
+
+            while (angulo <= 360)
+            {
+                double radianes = angulo * Math.PI / 180;
+
+                x = centroX + radio * Math.Cos(radianes);
+                y = centroY + radio * Math.Sin(radianes);
+
+                Console.WriteLine("{0};{1}", x, y);
+
+                angulo++;
+            }
+        }
+
+
+
+
+
+
         public void Aumentarestado(int cantidad)
         {
             estado += cantidad;
         }
+
+
         public void Perdervida()
         {
             if (vidas > 0)
