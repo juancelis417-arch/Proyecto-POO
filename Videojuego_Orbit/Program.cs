@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,44 +12,27 @@ namespace VideoJuego_Orbit
     {
         static void Main(string[] args)
         {
-           // orbit
+            // ==========================================
+            // ORBIT
+            // ==========================================
 
             // Se crea el objeto Orbit
             Orbit jugador = new Orbit();
 
             Console.WriteLine("---- Estado inicial ORBIT ----");
-            Console.WriteLine("Nombre: " + jugador.Nombre);
-            Console.WriteLine("PosiciónX: " + jugador.PosicionX);
-            Console.WriteLine("PosiciónY: " + jugador.PosicionY);
+            Console.WriteLine("Posición: " + jugador.Posicion);
             Console.WriteLine("Vidas: " + jugador.Vidas);
             Console.WriteLine("Puntaje: " + jugador.Puntaje);
-            Console.WriteLine("Tiempo restante: " + jugador.tiempoTotalSegundos);
+            Console.WriteLine("Tiempo restante: " + jugador.TiempoRestante);
             Console.WriteLine();
 
 
+            // Se prueba mover al jugador
+            jugador.Mover(5);
 
-
-            Console.WriteLine("---- Posicion del jugador ----");
-            Console.WriteLine("PosicionX: " + jugador.PosicionX);
-            Console.WriteLine("PosicionY: " + jugador.PosicionY);
-            Console.WriteLine($"Posicion en plano Cartesiano: ({jugador.PosicionX},{jugador.PosicionY})");
+            Console.WriteLine("---- Después de mover ----");
+            Console.WriteLine("Posición: " + jugador.Posicion);
             Console.WriteLine();
-
-
-            Console.WriteLine("Simulación del movimiento circular de ORBIT");
-            Console.WriteLine("Posiciones:");
-
-            
-
-            Console.WriteLine("Simulación movimiento circular de ORBIT");
-
-            jugador.movimiento();
-
-            Console.WriteLine("Simulación terminada");
-
-
-
-
 
 
             // Se prueba sumar puntos
@@ -103,24 +86,19 @@ namespace VideoJuego_Orbit
 
 
             // Tiempo que se juega en la partida
-
+            jugador.Tiemporesta(20);
 
             Console.WriteLine("---- Después de restar tiempo ----");
-            Console.WriteLine("Tiempo restante: " + jugador.TiempoPorPartida);
+            Console.WriteLine("Tiempo restante: " + jugador.TiempoRestante);
             Console.WriteLine();
 
 
             // Se resta más tiempo del disponible
-            
+            jugador.Tiemporesta(100);
 
             Console.WriteLine("---- Después de restar más tiempo del disponible ----");
-            Console.WriteLine("Tiempo restante: " + jugador.tiempoTotalSegundos);
+            Console.WriteLine("Tiempo restante: " + jugador.TiempoRestante);
             Console.WriteLine();
-
-
-
-
-
 
 
 
@@ -133,7 +111,8 @@ namespace VideoJuego_Orbit
             Console.WriteLine();
 
 
-            Gema_Energia_Estandar gema = new Gema_Energia_Estandar(50);
+            Gema_Energia_Estandar gema =
+                new Gema_Energia_Estandar(50);
 
 
             Console.WriteLine("---- Estado inicial ----");
@@ -167,11 +146,6 @@ namespace VideoJuego_Orbit
             }
 
             Console.WriteLine();
-
-
-
-
-
 
 
 
