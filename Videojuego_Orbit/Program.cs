@@ -101,51 +101,58 @@ namespace VideoJuego_Orbit
             Console.WriteLine();
 
 
+            
+            
+        // ==========================================
+        // GEMA DE ENERGÍA ESTÁNDAR
+        // ==========================================
 
-            // ==========================================
-            // GEMA DE ENERGÍA ESTÁNDAR
-            // ==========================================
+Console.WriteLine("***************************");
+Console.WriteLine("GEMA DE ENERGIA ESTANDAR");
+Console.WriteLine();
 
-            Console.WriteLine("***************************");
-            Console.WriteLine("GEMA DE ENERGIA ESTANDAR");
-            Console.WriteLine();
+// Se crea la gema
+// Posición inicial = 3
+// Valor en puntos = 50
+Gema_Energia_Estandar gema =
+    new Gema_Energia_Estandar(3, 50);
 
+Console.WriteLine("---- Estado inicial ----");
+Console.WriteLine("Posición: " + gema.Posicion);
+Console.WriteLine("Valor en puntos: " + gema.Valor_Puntos);
+Console.WriteLine("Recolectada: " + gema.Estado);
+Console.WriteLine("Carga disponible: " + gema.CargaDisponible);
+Console.WriteLine();
 
-            Gema_Energia_Estandar gema =
-                new Gema_Energia_Estandar(50);
+// ORBIT recoge la gema
+gema.Recolectar();
 
+Console.WriteLine("---- ORBIT recoge la gema ----");
+Console.WriteLine("Gema recolectada: " + gema.EstaRecolectada());
+Console.WriteLine("Carga disponible: " + gema.CargaDisponible);
+Console.WriteLine("Posición de la gema: " + gema.Posicion);
+Console.WriteLine();
 
-            Console.WriteLine("---- Estado inicial ----");
-            Console.WriteLine("Posición: " + gema.Posicion);
-            Console.WriteLine("Valor en puntos: " + gema.Valor_Puntos);
-            Console.WriteLine("Estado: " + gema.Estado);
-            Console.WriteLine();
+// ORBIT utiliza la carga especial
+bool ataqueRealizado = gema.UsarCarga();
 
+Console.WriteLine("---- ORBIT utiliza la carga ----");
 
-            // Se prueba mover la gema
-            gema.mover(3);
+if (ataqueRealizado == true)
+{
+    Console.WriteLine("ORBIT utilizó la carga de energía.");
+    Console.WriteLine("El dron puede ser desactivado durante "
+        + gema.DuracionEfecto + " segundos.");
+}
+else
+{
+    Console.WriteLine("ORBIT no tiene una carga disponible.");
+}
 
-            Console.WriteLine("---- Después de mover ----");
-            Console.WriteLine("Posición: " + gema.Posicion);
-            Console.WriteLine();
+Console.WriteLine("Carga disponible después de usarla: "
+    + gema.CargaDisponible);
 
-
-            // Recolección de gema
-            gema.aumentarestado(60);
-
-            Console.WriteLine("---- Después de aumentar el estado ----");
-            Console.WriteLine("Estado: " + gema.Estado);
-
-            if (gema.Estadocapacidad())
-            {
-                Console.WriteLine("La gema está recolectada.");
-            }
-            else
-            {
-                Console.WriteLine("La gema no está recolectada.");
-            }
-
-            Console.WriteLine();
+Console.WriteLine();
 
 
 
