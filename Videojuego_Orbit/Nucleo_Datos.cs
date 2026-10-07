@@ -8,25 +8,49 @@ namespace Videojuego_Orbit
 {
     internal class Nucleo_Datos
     {
-        int posicion;
-        int numeroOrden;
-        int estado; 
+        int posicionX;
+        int posicionY;
+        int ordenGemas;
+        int estado;
+        string nombre;
 
-        public Nucleo_Datos(int posicioninicial, int orden)
+        public Nucleo_Datos()
         {
-            this.posicion = posicioninicial;
-            this.numeroOrden = orden; // no se sabe el nuemmro de la orden que indica en el taller 
-            this.estado = 50;
+            this.posicionX = 0;
+            this.posicionY = 0;
+            this.ordenGemas = 100;
         }
 
-        public int Posicion { get => posicion; private set => posicion = value; }
-        public int NumeroOrden { get => numeroOrden; private set => numeroOrden = value; }
-        public int Estado { get => estado; private set => estado = value; }
+        public int PosicionX { get => posicionX; set => posicionX = value; }
+        public int PosicionY { get => posicionY; set => posicionY = value; }
+        public int OrdenGemas { get => ordenGemas; set => ordenGemas = value; }
+        public int Estado1 { get => estado; set => estado = value; }
+        public string Nombre { get => nombre; set => nombre = value; }
 
-        public void posicioninicial(int posicioninicial)
+        public void Nombredelnucleo(string NombreActual)
         {
-            posicion = posicioninicial;
+            nombre=NombreActual;
         }
+
+        public void posicioninicial(int NuevaX, int NuevaY)
+        {
+            posicionX = NuevaX;
+            posicionY = NuevaY;
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
          
         public void numeroorden()
         {

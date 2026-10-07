@@ -46,6 +46,8 @@
     <Compile Include="Celula_Sobrecarga.cs" />
     <Compile Include="Dron_Cazador _Tipo_B.cs" />
     <Compile Include="Dron_Centinela_Tipo_A.cs" />
+    <Compile Include="GemaAmarillaDelNucleo.cs" />
+    <Compile Include="GemasDelNucleo.cs" />
     <Compile Include="Gema_Energia_Estandar.cs" />
     <Compile Include="Nucleo_Datos.cs" />
     <Compile Include="Orbit.cs" />
