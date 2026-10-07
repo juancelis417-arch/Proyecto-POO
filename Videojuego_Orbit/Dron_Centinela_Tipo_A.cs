@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Videojuego_Orbit
 {
@@ -38,5 +38,5 @@ namespace Videojuego_Orbit
         }
     }
 }
-    }
-}
+    
+
