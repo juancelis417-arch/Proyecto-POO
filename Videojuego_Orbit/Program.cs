@@ -156,6 +156,126 @@ Console.WriteLine();
 
 
 
+
+            // ==========================================
+            // PUERTA LÁSER
+            // ==========================================
+
+Console.WriteLine("***************************");
+Console.WriteLine("PUERTA LASER");
+Console.WriteLine();
+
+// Se crea una puerta láser
+// Posición = 10
+// Duración del ciclo = 3 segundos
+Puerta_Laser puerta = new Puerta_Laser(10, 3);
+
+Console.WriteLine("---- Estado inicial ----");
+Console.WriteLine("Posición: " + puerta.Posicion);
+
+if (puerta.Estado == false)
+{
+    Console.WriteLine("La puerta está cerrada.");
+}
+
+Console.WriteLine("Bloquea el paso: " + puerta.BloquearPaso());
+Console.WriteLine();
+
+
+// Espera los 3 segundos establecidos para el ciclo
+Thread.Sleep((int)(puerta.DuracionCiclo * 1000));
+
+// Cambia de cerrada a abierta
+puerta.CambiarEstado();
+
+Console.WriteLine("---- Después de 3 segundos ----");
+
+if (puerta.Estado == true)
+{
+    Console.WriteLine("La puerta está abierta.");
+}
+
+Console.WriteLine("Bloquea el paso: " + puerta.BloquearPaso());
+Console.WriteLine();
+
+
+// Espera otros 3 segundos
+Thread.Sleep((int)(puerta.DuracionCiclo * 1000));
+
+// Cambia de abierta a cerrada
+puerta.CambiarEstado();
+
+Console.WriteLine("---- Después de otros 3 segundos ----");
+
+if (puerta.Estado == false)
+{
+    Console.WriteLine("La puerta está cerrada.");
+}
+
+Console.WriteLine("Bloquea el paso: " + puerta.BloquearPaso());
+Console.WriteLine();
+
+
+            
+            
+            // ==========================================
+            // PORTAL DE SALIDA
+            // ==========================================
+
+Console.WriteLine("***************************");
+Console.WriteLine("PORTAL DE SALIDA");
+Console.WriteLine();
+
+// Se crea el portal
+Portal_Salida portal = new Portal_Salida(20);
+
+Console.WriteLine("---- Estado inicial ----");
+Console.WriteLine("Posición: " + portal.Posicion);
+Console.WriteLine("Portal abierto: " + portal.Estado);
+Console.WriteLine();
+
+// Al inicio todavía no se han recogido
+// correctamente los tres núcleos
+bool nucleosCompletados = false;
+
+portal.ActivarPortal(nucleosCompletados);
+
+if (portal.PuedeSalir())
+{
+    Console.WriteLine("El portal está abierto. ORBIT puede salir.");
+}
+else
+{
+    Console.WriteLine("El portal está cerrado.");
+}
+
+Console.WriteLine();
+
+
+// Simulación:
+// Los núcleos fueron recogidos correctamente
+// en el orden: amarillo, azul y verde
+nucleosCompletados = true;
+
+portal.ActivarPortal(nucleosCompletados);
+
+Console.WriteLine("---- Núcleos completados ----");
+Console.WriteLine("Orden correcto: Amarillo -> Azul -> Verde");
+
+if (portal.PuedeSalir())
+{
+    Console.WriteLine("El portal se abrió.");
+    Console.WriteLine("ORBIT puede salir del nivel.");
+}
+else
+{
+    Console.WriteLine("El portal continúa cerrado.");
+}
+
+Console.WriteLine();
+
+
+
             // ==========================================
             // DRON CENTINELA TIPO A
             // ==========================================
