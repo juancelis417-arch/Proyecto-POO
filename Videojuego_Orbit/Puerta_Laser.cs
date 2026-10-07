@@ -52,6 +52,15 @@ namespace Videojuego_Orbit
             estado = false;
         }
 
+        // Cambiar automáticamente el estado de la puerta
+        public void CambiarEstado()
+        {
+            if (estado == false)
+                Abrir();
+            else
+                Cerrar();
+        }
+
         // Verificar si bloquea el paso
         public bool BloquearPaso()
         {
