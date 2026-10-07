@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,5 +40,11 @@ namespace Videojuego_Orbit
             this.estado1 = estado1;
             this.totalGemas = totalGemas;
         }
+
+        public void SumarGemas(int cantidad)
+        {
+            totalGemas += cantidad;
+        }
+
     }
 }

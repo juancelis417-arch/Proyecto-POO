@@ -17,7 +17,7 @@ namespace Videojuego_Orbit
             
         }
 
-        public bool Recoleccion(int gemaAmarilla)
+        public bool Recolecion(int gemaAmarilla)
         {
             if(GemaAmarilla == P1_gemaAmarilla)
             {
