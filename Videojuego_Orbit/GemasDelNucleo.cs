@@ -37,14 +37,6 @@ namespace Videojuego_Orbit
         
         }
 
-        public GemasDelNucleo(string nombre, int posicionX, int posicionY, string estado1, int totalGemas)
-        {
-            this.nombre = nombre;
-            this.posicionX = posicionX;
-            this.posicionY = posicionY;
-            this.estado1 = estado1;
-            this.totalGemas = totalGemas;
-        }
 
         public void SumarGemas(int cantidad)
         {
