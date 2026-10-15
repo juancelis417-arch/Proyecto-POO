@@ -9,7 +9,6 @@ namespace Videojuego_Orbit
 {
     internal class GemaAmarillaDelNucleo : GemasDelNucleo
     {
-        int GemaAmarilla;
 
 
         public GemaAmarillaDelNucleo(string nombre, int posicionX, int posicionY, string estado, int totalGemas) : base(nombre, posicionX, posicionY, estado, totalGemas)
@@ -19,9 +18,11 @@ namespace Videojuego_Orbit
 
         public bool Recolecion(int gemaAmarilla)
         {
-            if(GemaAmarilla == P1_gemaAmarilla)
+            if(gemaActual == P1_gemaAmarilla)
             {
+
                 totalGemas += gemaAmarilla;
+                gemaActual++;
                 return true;
 
             }

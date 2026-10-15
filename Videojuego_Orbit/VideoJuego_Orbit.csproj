@@ -51,7 +51,6 @@
     <Compile Include="GemaRojaDelNucleo.cs" />
     <Compile Include="GemasDelNucleo.cs" />
     <Compile Include="Gema_Energia_Estandar.cs" />
-    <Compile Include="Nucleo_Datos.cs" />
     <Compile Include="Orbit.cs" />
     <Compile Include="Portal_Salida.cs" />
     <Compile Include="Program.cs" />

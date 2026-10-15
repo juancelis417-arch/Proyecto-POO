@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Videojuego_Orbit
 {
-    internal class GemasDelNucleo
+    internal class GemasDelNucleo:Portal_Salida
     {
         protected string nombre;
         protected int posicionX;
@@ -17,9 +17,10 @@ namespace Videojuego_Orbit
         protected int P1_gemaAmarilla;
         protected int P2_gemaAzul;
         protected int P3_gemaRoja;
+        protected static int gemaActual;
 
 
-        public GemasDelNucleo(string nombre, int posicionX, int posicionY, int totalGemas)
+        public GemasDelNucleo(string nombre, int posicionX, int posicionY, int totalGemas): base()
         {
             this.estado = false;
             this.nombre = nombre;
@@ -29,6 +30,8 @@ namespace Videojuego_Orbit
             this.P1_gemaAmarilla = 1;
             this.P2_gemaAzul = 2;
             this.P3_gemaRoja = 3;
+            gemaActual = 1;
+
         
         }
 
@@ -46,5 +49,14 @@ namespace Videojuego_Orbit
             totalGemas += cantidad;
         }
 
+        public bool AbrirPortal()
+        {
+            if (totalGemas >= 100)
+            {
+                ActivarPortal(true);
+                   return true;
+            }
+            return false;
+        }
     }
 }

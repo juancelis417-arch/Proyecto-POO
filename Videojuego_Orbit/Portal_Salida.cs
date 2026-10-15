@@ -9,8 +9,8 @@ namespace Videojuego_Orbit
     internal class Portal_Salida
     {
         // Atributos
-        int posicion;
-        bool estado; // true = abierto, false = cerrado
+        protected   int posicion;
+        protected bool estado; // true = abierto, false = cerrado
 
         // Constructor
         public Portal_Salida(int posicionInicial)
@@ -18,6 +18,12 @@ namespace Videojuego_Orbit
             this.posicion = posicionInicial;
             this.estado = false;
         }
+
+        public Portal_Salida()
+        {
+        }
+
+
 
         // Propiedades
         public int Posicion
@@ -29,11 +35,11 @@ namespace Videojuego_Orbit
         public bool Estado
         {
             get => estado;
-            private set => estado = value;
+            protected set => estado = value;
         }
 
         // Verificar si se puede activar el portal
-        public bool ActivarPortal(bool nucleosCompletados)
+        protected bool ActivarPortal(bool nucleosCompletados)
         {
             if (nucleosCompletados == true)
             {
