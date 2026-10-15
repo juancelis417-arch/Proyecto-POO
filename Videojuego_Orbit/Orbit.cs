@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
+//Clase de Juan
+
+
 namespace VideoJuego_Orbit
 {
     internal class Orbit

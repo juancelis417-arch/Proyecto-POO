@@ -5,6 +5,8 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
+//Clase de Juan
+
 namespace Videojuego_Orbit
 {
     internal class GemaAmarillaDelNucleo : GemasDelNucleo
