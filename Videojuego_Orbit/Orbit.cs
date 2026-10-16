@@ -138,42 +138,13 @@ namespace VideoJuego_Orbit
 
 
 
-        public void Sumarpuntos(int puntos)
-        {
-            puntaje += puntos;
-        }
-
-        public void GemaAmarilla(int gemaAmarilla, int nuevaX, int nuevaY)
-        {
-            posicionX = nuevaX;
-            posicionY = nuevaY;
-            estado = gemaAmarilla;
-            totalGemas += gemaAmarilla;
-        }
+       
 
 
-        public void GemaAzul(int gemaAzul, int nuevaX, int nuevaY)
-        {
-            posicionX = nuevaX;
-            posicionY = nuevaY;
-            estado = gemaAzul;
-            totalGemas += gemaAzul;
-        }
 
 
-        public void GemaRoja(int gemaRoja, int nuevaX, int nuevaY)
-        {
-            posicionX = nuevaX;
-            posicionY = nuevaY;
-            estado = gemaRoja;
-            totalGemas += gemaRoja;
 
-        }
 
-        public void SumarGemas(int cantidad)
-        {
-            totalGemas += cantidad;
-        }
 
 
 
