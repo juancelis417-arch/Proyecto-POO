@@ -1,42 +1,47 @@
-using System;
-
-namespace Videojuego_Orbit
+namespace VideoJuego_Orbit
 {
     internal class Dron_Centinela_Tipo_A : Dron
     {
-        // Atributo propio del Centinela
-        string rutaPatrulla;
+        private int direccion;
+        private int limiteSuperior;
+        private int limiteInferior;
 
-        // Constructor
-        public Dron_Centinela_Tipo_A()
-            : base(1, 20)
+        public int Direccion { get => direccion; private set => direccion = value; }
+        public int LimiteSuperior { get => limiteSuperior; private set => limiteSuperior = value; }
+        public int LimiteInferior { get => limiteInferior; private set => limiteInferior = value; }
+
+        public Dron_Centinela_Tipo_A(
+            int xInicial,
+            int yInicial,
+            int velocidadInicial,
+            int limiteSuperior,
+            int limiteInferior)
+            : base(xInicial, yInicial, velocidadInicial)
         {
-            rutaPatrulla = "Sin Asignar";
+            Direccion = 1;
+            LimiteSuperior = limiteSuperior;
+            LimiteInferior = limiteInferior;
         }
 
-        // Propiedad
-        public string RutaPatrulla
+        public override void Accion()
         {
-            get => rutaPatrulla;
-            private set => rutaPatrulla = value;
-        }
+            // El Centinela solo se mueve de arriba hacia abajo
+            // por el mismo pasillo.
+            int nuevaY = Y + (Velocidad * Direccion);
 
-        // Asignar la ruta que va a patrullar
-        public void AsignarRuta(string ruta)
-        {
-            rutaPatrulla = ruta;
-        }
+            if (nuevaY >= LimiteSuperior)
+            {
+                nuevaY = LimiteSuperior;
+                Direccion = -1;
+            }
 
-        // Polimorfismo:
-        // El Centinela se mueve patrullando una ruta fija
-        public override string Mover(int posicionActual)
-        {
-            posicion = posicionActual;
+            if (nuevaY <= LimiteInferior)
+            {
+                nuevaY = LimiteInferior;
+                Direccion = 1;
+            }
 
-            return "El Dron Centinela se mueve por la ruta: "
-                   + rutaPatrulla;
+            CambiarPosicion(X, nuevaY);
         }
     }
 }
-    
-

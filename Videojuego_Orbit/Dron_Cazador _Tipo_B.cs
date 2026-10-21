@@ -1,40 +1,34 @@
-using System;
-
-namespace Videojuego_Orbit
+namespace VideoJuego_Orbit
 {
     internal class Dron_Cazador__Tipo_B : Dron
     {
-        // Atributo propio del Dron Cazador
-        int posicionObjeto; // Posición de ORBIT
-
-        // Constructor
-        public Dron_Cazador__Tipo_B(int posicionInicial)
-            : base(posicionInicial, 20)
+        private Dron_Cazador__Tipo_B(int xInicial, int yInicial, int velocidadInicial)
+            : base(xInicial, yInicial, velocidadInicial)
         {
-            this.posicionObjeto = 2;
         }
 
-        // Propiedad propia del Cazador
-        public int PosicionObjeto
+
+        public void Perseguir(Orbit orbit)
         {
-            get => posicionObjeto;
-            private set => posicionObjeto = value;
+            int nuevoX = X;
+            int nuevoY = Y;
+
+            if (orbit.X > X)
+                nuevoX += Velocidad;
+            else if (orbit.X < X)
+                nuevoX -= Velocidad;
+
+            if (orbit.Y > Y)
+                nuevoY += Velocidad;
+            else if (orbit.Y < Y)
+                nuevoY -= Velocidad;
+
+            CambiarPosicion(nuevoX, nuevoY);
         }
 
-        // Actualiza la posición de ORBIT
-        public void calcularDireccion(int nuevaPosicionOrbit)
+        public override void Accion()
         {
-            posicionObjeto = nuevaPosicionOrbit;
-        }
-
-        // Polimorfismo:
-        // El Cazador se mueve persiguiendo a ORBIT
-        public override string Mover(int posicionActual)
-        {
-            posicion = posicionActual;
-
-            return "El Dron Cazador se mueve hacia ORBIT en la posición: "
-                   + posicionObjeto;
+            // La persecucion se realiza con el metodo Perseguir().
         }
     }
 }

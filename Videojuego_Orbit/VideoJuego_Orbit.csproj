@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Celula_Sobrecarga.cs" />
+    <Compile Include="Dron.cs" />
     <Compile Include="Dron_Cazador _Tipo_B.cs" />
     <Compile Include="Dron_Centinela_Tipo_A.cs" />
     <Compile Include="GemaAmarillaDelNucleo.cs" />
