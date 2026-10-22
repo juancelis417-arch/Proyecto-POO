@@ -1,4 +1,4 @@
-namespace VideoJuego_Orbit
+    namespace VideoJuego_Orbit
 {
     internal abstract class Dron
     {

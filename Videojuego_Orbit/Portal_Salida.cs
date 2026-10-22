@@ -39,7 +39,7 @@ namespace Videojuego_Orbit
         }
 
         // Verificar si se puede activar el portal
-        protected bool ActivarPortal(bool nucleosCompletados)
+        public bool ActivarPortal(bool nucleosCompletados)
         {
             if (nucleosCompletados == true)
             {

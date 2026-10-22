@@ -17,7 +17,7 @@ namespace Videojuego_Orbit
 
         int celulaSobrecarga;
         int duracionEfecto;
-        bool estadoDeRecoleccion;
+
 
         public Celula_Sobrecarga(string nombre,int posicionX, int posicionY, int totalGemas) : base(nombre, posicionX, posicionY, totalGemas)
         {

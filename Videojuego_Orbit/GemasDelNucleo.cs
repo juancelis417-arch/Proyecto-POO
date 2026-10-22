@@ -1,41 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using VideoJuego_Orbit;
 
 //Clase de Juan
 
 namespace Videojuego_Orbit
 {
-    internal class GemasDelNucleo:Portal_Salida
+    internal class GemasDelNucleo
     {
         protected string nombre;
         protected int posicionX;
         protected int posicionY;
-        protected bool estado;
-        protected int totalGemas;
-        private string estado1;
-        protected int P1_gemaAmarilla;
-        protected int P2_gemaAzul;
-        protected int P3_gemaRoja;
-        protected static int gemaActual;
+
+        string tipo;
+        int valor;
+        int orden;
+        bool recolectada;
+        private static int gemaActual = 1;
+        private static int totalGemas = 0;
 
 
-        public GemasDelNucleo(string nombre, int posicionX, int posicionY, int totalGemas): base()
+        private Portal_Salida portalAsociado;
+
+
+
+        public GemasDelNucleo(string nombre, int posicionX, int posicionY, string Tipo, int Orden, int Valor, Portal_Salida Portal)
         {
-            this.estado = false;
             this.nombre = nombre;
             this.posicionX = posicionX;
             this.posicionY = posicionY;
-            this.totalGemas = totalGemas;
-            this.P1_gemaAmarilla = 1;
-            this.P2_gemaAzul = 2;
-            this.P3_gemaRoja = 3;
-            gemaActual = 1;
 
-        
+
+            this.tipo = Tipo;
+            this.orden = Orden;
+            this.valor = Valor;
+            this.recolectada = false;
+            this.portalAsociado = Portal;
+  
+
+
+
         }
+
+
+        public bool Recoleccion()
+        {
+            if (orden == gemaActual && !recolectada)
+            {
+                recolectada = true;
+                SumarGemas(valor);
+                gemaActual++;
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+
+
+
+
+
+
+
 
 
         public void SumarGemas(int cantidad)
@@ -47,8 +80,8 @@ namespace Videojuego_Orbit
         {
             if (totalGemas >= 100)
             {
-                ActivarPortal(true);
-                   return true;
+                portalAsociado.ActivarPortal(true);
+                return true;
             }
             return false;
         }
