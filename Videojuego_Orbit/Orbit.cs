@@ -4,8 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
+using Videojuego_Orbit;
 
 //Clase de Juan
 
@@ -39,6 +40,10 @@ namespace VideoJuego_Orbit
 
         public double x;
         public double y;
+
+
+
+        private List<GemasDelNucleo> gemas = new List<GemasDelNucleo>();
 
         // Constructor 
 
@@ -138,23 +143,25 @@ namespace VideoJuego_Orbit
 
 
 
+
        
 
 
-
-
-
-
-
-
-
-        public bool Estadocapacidad()
+        public void RecoleccionGemas(GemasDelNucleo gema )
         {
-            if (totalGemas >= 100) // Cuando la carga supera 100, se activa la sobrecarga.
-                return true;
-            else
-                return false;// sino es porque la recarga esta sobrecargado
+            if(gema.Recoleccion())
+            {
+                
+                gemas.Add(new GemasDelNucleo("Amarilla", 1, 30, 0, 0, this));
+                gemas.Add(new GemasDelNucleo("Azul", 2, 30, 1, 1, this));
+                gemas.Add(new GemasDelNucleo("Roja", 3, 40, 2, 2, this));
+            }
         }
+
+
+
+
+
 
 
 

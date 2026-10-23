@@ -26,6 +26,8 @@ namespace Videojuego_Orbit
 
         private Portal_Salida portalAsociado;
 
+        private Orbit jugador;
+
 
 
         public GemasDelNucleo(string nombre, int posicionX, int posicionY, string Tipo, int Orden, int Valor, Portal_Salida Portal)
@@ -47,6 +49,18 @@ namespace Videojuego_Orbit
         }
 
 
+
+        public GemasDelNucleo(string tipo, int orden, int valor, int posicionX, int posicionY, Orbit jugador)
+
+        {
+            this.tipo = tipo;
+            this.orden = orden;
+            this.valor = valor;
+            this.posicionX = posicionX;
+            this.posicionY = posicionY;
+            this.jugador = jugador;
+        }
+
         public bool Recoleccion()
         {
             if (orden == gemaActual && !recolectada)
@@ -60,6 +74,7 @@ namespace Videojuego_Orbit
 
             return false;
         }
+
 
 
 
