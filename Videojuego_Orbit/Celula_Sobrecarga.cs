@@ -55,10 +55,10 @@ namespace Videojuego_Orbit
 
         public bool RecolecciondeEnergia()
         {
-            if(recolectada==false)
+            if(recolectada==false && LimiteRecoleccion())
             {
                 recolectada = true;
-                sobrecargaActiva = true;
+
                 return true;
 
 
@@ -69,13 +69,14 @@ namespace Videojuego_Orbit
 
         public bool ActivarPoder()
         {
-            if (recolectada == true)
+            if (recolectada == true  && celulaSobrecarga>0)
             {
                 Console.WriteLine("Desea gastar una energia presione la tecla S/N");
-                Console.ReadLine();
-                if (s == 's')
+                char respuesta = Char.ToLower(Console.ReadKey(true).KeyChar);
+                if (respuesta == 's')
                 {
                     celulaSobrecarga--;
+                    sobrecargaActiva = true;
                     IniciarTiempo();
                     SegundosCelula();
                     return true;
@@ -107,16 +108,17 @@ namespace Videojuego_Orbit
             while (tiempocelula >= 0)
             {
 
-                segundos = tiempocelula % 10;
+                segundos = tiempocelula;
 
 
                 //Otra opcion era console clear.
 
-                Console.SetCursorPosition(0, fila);
+                Console.SetCursorPosition(0, fila); 
                 Console.WriteLine($"Tiempo restante de la celula: {segundos:D1}");
                 tiempocelula--;
                 Thread.Sleep(1000);
             }
+            sobrecargaActiva = false;
         }
 
     }

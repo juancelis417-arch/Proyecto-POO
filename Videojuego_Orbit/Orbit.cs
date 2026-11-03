@@ -33,13 +33,20 @@ namespace VideoJuego_Orbit
         double posicion;
 
         // Posicion del orbit
-        public double centroX = 200;
-        public double centroY = 200;
-        public double radio = 150;
-        public double angulo = 0;
+        double centroX;
+        public double centroY;
+        double[] radios;
+        public int sectores;
+        private int carril;
+        int sector;
+
 
         public double x;
         public double y;
+
+
+
+
 
 
 
@@ -55,15 +62,29 @@ namespace VideoJuego_Orbit
             this.puntaje = 0;
             this.estado = 0;
             this.tiempoPorPartida = 60;
-            this.altura = 5;
             this.velocidad = 10;
+            this.tiempocelula = 10;
+
+            this.centroX = 0;
+            this.centroY = 0;
+            this.radios = new double[] { 20, 40, 60, 80, 100 };
+            this.sectores = 24;
+            this.carril = 4;
+            this.sector = 0;
 
 
 
 
 
 
+            ActualizarPosicion();
         }
+
+
+
+
+
+
         //
         public int PosicionX { get => posicionX; }
         public int PosicionY { get => posicionY; }
@@ -78,6 +99,13 @@ namespace VideoJuego_Orbit
         public int Segundos { get => segundos; }
         public int TotalGemas { get => totalGemas; set => totalGemas = value; }
         public string Nombre { get => nombre; }
+
+
+
+        public int Carril { get => carril; }
+        public int Sector { get => sector; }
+        public int Carriles { get => 5; }
+        public int Sectores { get => sectores; }
 
 
         //Metodos
@@ -95,33 +123,105 @@ namespace VideoJuego_Orbit
 
         }
 
-        public void moverDerecha()
+        public double CalcularX(int numeroCarril, int numeroSector)
         {
-            posicionX = posicionX + velocidad;
-
+            double grados = numeroSector * 360.0 / sectores;
+            double radianes = grados * Math.PI / 180;
+            return Math.Round(centroX + radios[numeroCarril] * Math.Cos(radianes), 1) + 0.0;   // + 0.0 evita el -0
         }
 
-        public void moverIzquierda()
-        {
-            posicionX = posicionX + velocidad;
 
+
+        public double CalcularY(int numeroCarril, int numeroSector)
+        {
+            double grados = numeroSector * 360.0 / sectores;
+            double radianes = grados * Math.PI / 180;
+            return Math.Round(centroY + radios[numeroCarril] * Math.Sin(radianes), 1) + 0.0;
         }
 
-        public void movimiento()
+
+
+
+        public void ActualizarPosicion()
         {
-
-            while (angulo <= 360)
-            {
-                double radianes = angulo * Math.PI / 180;
-
-                x = centroX + radio * Math.Cos(radianes);
-                y = centroY + radio * Math.Sin(radianes);
-
-                Console.WriteLine("{0};{1}", x, y);
-
-                angulo++;
-            }
+            posicionX = (int)CalcularX(carril, sector);
+            posicionY = (int)CalcularY(carril, sector);
         }
+
+
+
+
+        bool Libre(int nuevoCarril, int nuevoSector, bool[,] muros)
+        {
+            if (nuevoCarril < 0 || nuevoCarril >= radios.Length)
+
+                return false;                          // ese anillo no existe
+            if (nuevoSector < 0 || nuevoSector >= sectores)
+                return false;
+
+            if (muros[nuevoCarril, nuevoSector])
+                return false;                          // hay un muro
+            return true;
+        }
+
+
+
+
+        public bool MoverAdelante(bool[,] muros)
+        {
+            int nuevoSector = (sector + 1) % sectores;
+            if (!Libre(carril, nuevoSector, muros))
+                return false;
+
+            sector = nuevoSector;
+            ActualizarPosicion();
+            return true;
+        }
+
+
+
+
+        public bool MoverAtras(bool[,] muros)
+        {
+            int nuevoSector = (sector - 1 + sectores) % sectores;
+            if (!Libre(carril, nuevoSector, muros))
+                return false;
+
+            sector = nuevoSector;
+            ActualizarPosicion();
+            return true;
+        }
+
+
+        public bool MoverAfuera(bool[,] muros)
+        {
+            int nuevoCarril = carril + 1;
+            if (!Libre(nuevoCarril, sector, muros))
+                return false;
+
+            carril = nuevoCarril;
+            ActualizarPosicion();
+            return true;
+        }
+
+
+        public bool MoverAdentro(bool[,] muros)
+        {
+            int nuevoCarril = carril - 1;
+            if (!Libre(nuevoCarril, sector, muros))
+                return false;
+
+            carril = nuevoCarril;
+            ActualizarPosicion();
+            return true;
+        }
+
+
+
+
+
+
+
 
 
 
@@ -149,21 +249,31 @@ namespace VideoJuego_Orbit
 
         public void RecoleccionGemas(GemasDelNucleo gema )
         {
-            if(gema.Recoleccion())
-            {
+            if (gema.Recoleccion())
+                gemas.Add(gema);
+            
                 
-                gemas.Add(new GemasDelNucleo("Amarilla", 1, 30, 0, 0, this));
-                gemas.Add(new GemasDelNucleo("Azul", 2, 30, 1, 1, this));
-                gemas.Add(new GemasDelNucleo("Roja", 3, 40, 2, 2, this));
-            }
+
+            
+        }
+
+
+        public void SumarGemas(int cantidad)
+        {
+            totalGemas += cantidad;
         }
 
 
 
+        public void Sumarpuntos(int puntos)
+        {
+            puntaje += puntos;
+        }
 
-
-
-
+        public bool Estadocapacidad()
+        {
+            return estado > 100;
+        }
 
 
 

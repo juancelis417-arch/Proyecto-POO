@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using VideoJuego_Orbit;
 
@@ -15,6 +16,8 @@ namespace Videojuego_Orbit
         protected string nombre;
         protected int posicionX;
         protected int posicionY;
+        public int tiempocelula;
+        public int segundos;
 
         string tipo;
         int valor;
@@ -61,6 +64,10 @@ namespace Videojuego_Orbit
             this.jugador = jugador;
         }
 
+        public GemasDelNucleo()
+        {
+        }
+
         public bool Recoleccion()
         {
             if (orden == gemaActual && !recolectada)
@@ -93,12 +100,39 @@ namespace Videojuego_Orbit
 
         public bool AbrirPortal()
         {
-            if (totalGemas >= 100)
+            if (totalGemas >= 100 && portalAsociado !=null)
             {
                 portalAsociado.ActivarPortal(true);
                 return true;
             }
             return false;
+        }
+
+
+
+
+
+        public void IniciarTiempo()
+        {
+            tiempocelula = 10;
+
+        }
+        public void SegundosCelula()
+        {
+            int fila = Console.CursorTop;
+            while (tiempocelula >= 0)
+            {
+
+                segundos = tiempocelula % 10;
+
+
+                //Otra opcion era console clear.
+
+                Console.SetCursorPosition(0, fila);
+                Console.WriteLine($"Tiempo restanten de la celula: {segundos:D1}");
+                tiempocelula--;
+                Thread.Sleep(1000);
+            }
         }
     }
 }

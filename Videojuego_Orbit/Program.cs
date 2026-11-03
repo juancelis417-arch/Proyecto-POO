@@ -10,28 +10,38 @@ namespace VideoJuego_Orbit
 {
     internal class Program
     {
+
+        // Muestra qué pasó con un movimiento (la consola solo está aquí, no en Orbit)
+        static void Mostrar(string accion, bool seMovio, Orbit jugador)
+        {
+            string resultado = seMovio ? "se movió" : "bloqueado";
+            Console.WriteLine($"{accion}: {resultado} -> carril {jugador.Carril}, sector {jugador.Sector}, posición ({jugador.PosicionX}, {jugador.PosicionY})");
+        }
+
+
         static void Main(string[] args)
         {
-            // ==========================================
-            // ORBIT
-            // ==========================================
+            //ORBIT
 
             // Se crea el objeto Orbit
             Orbit jugador = new Orbit();
+            jugador.NombreDePersonaje("Orbit");
 
             Console.WriteLine("---- Estado inicial ORBIT ----");
-            Console.WriteLine("Posición: " + jugador.Posicion);
+            Console.WriteLine("Nombre: " + jugador.Nombre);
+            Console.WriteLine("PosiciónX: " + jugador.PosicionX);
+            Console.WriteLine("PosiciónY: " + jugador.PosicionY);
             Console.WriteLine("Vidas: " + jugador.Vidas);
             Console.WriteLine("Puntaje: " + jugador.Puntaje);
-            Console.WriteLine("Tiempo restante: " + jugador.TiempoRestante);
+            Console.WriteLine("Tiempo restante: " + jugador.TiempoTotalSegundos);
             Console.WriteLine();
 
+            // Posición del jugador
 
-            // Se prueba mover al jugador
-            jugador.Mover(5);
-
-            Console.WriteLine("---- Después de mover ----");
-            Console.WriteLine("Posición: " + jugador.Posicion);
+            Console.WriteLine("---- Posicion del jugador ----");
+            Console.WriteLine("PosicionX: " + jugador.PosicionX);
+            Console.WriteLine("PosicionY: " + jugador.PosicionY);
+            Console.WriteLine($"Posicion en plano Cartesiano: ({jugador.PosicionX},{jugador.PosicionY})");
             Console.WriteLine();
 
 
@@ -51,63 +61,177 @@ namespace VideoJuego_Orbit
             Console.WriteLine();
 
 
+
             // Se verifica la recarga
             jugador.Aumentarestado(30);
 
             Console.WriteLine("---- Después de aumentar el estado ----");
+            Console.WriteLine("Estado: " + jugador.Estado);
 
             if (jugador.Estadocapacidad())
             {
-                Console.WriteLine("La recarga es normal.");
+                Console.WriteLine("¡Sobrecarga detectada!");
             }
             else
             {
-                Console.WriteLine("Sobrecarga detectada.");
+                Console.WriteLine("La recarga es normal.");
             }
 
             Console.WriteLine();
 
 
-            // Se aumenta nuevamente el estado
-            jugador.Aumentarestado(30);
+
+            // Se aumenta nuevamente el estado (ahora pasa de 100)
+            jugador.Aumentarestado(80);
 
             Console.WriteLine("---- Después de aumentar el estado de nuevo ----");
+            Console.WriteLine("Estado: " + jugador.Estado);
 
             if (jugador.Estadocapacidad())
             {
-                Console.WriteLine("La recarga es normal.");
+                Console.WriteLine("¡Sobrecarga detectada!");
             }
             else
             {
-                Console.WriteLine("¡Sobrecarga detectada!");
+                Console.WriteLine("La recarga es normal.");
             }
 
             Console.WriteLine();
 
 
             // Tiempo que se juega en la partida
-            jugador.Tiemporesta(20);
+            jugador.IniciarTiempo();
 
-            Console.WriteLine("---- Después de restar tiempo ----");
-            Console.WriteLine("Tiempo restante: " + jugador.TiempoRestante);
+            Console.WriteLine("---- Tiempo de la partida ----");
+            Console.WriteLine("Tiempo por partida: " + jugador.TiempoPorPartida);
+            Console.WriteLine("Tiempo restante: " + jugador.TiempoTotalSegundos);
             Console.WriteLine();
 
 
-            // Se resta más tiempo del disponible
-            jugador.Tiemporesta(100);
 
-            Console.WriteLine("---- Después de restar más tiempo del disponible ----");
-            Console.WriteLine("Tiempo restante: " + jugador.TiempoRestante);
+  
+
+
+
+
+
+            // ---------------------------------------------------------
+            // Simulación del movimiento de ORBIT por anillos y sectores
+            // ---------------------------------------------------------
+            Console.WriteLine();
+            Console.WriteLine("---- Simulación del movimiento de ORBIT ----");
+
+            // Mapa de prueba: una casilla por carril y sector. true = muro
+            bool[,] muros = new bool[jugador.Carriles, jugador.Sectores];
+            muros[4, 2] = true;        // muro en el anillo de afuera, sector 2
+
+            Console.WriteLine($"Inicio: carril {jugador.Carril}, sector {jugador.Sector}, posición ({jugador.PosicionX}, {jugador.PosicionY})");
+
+            // Las cuatro posiciones a las que podría ir (se calculan sin mover a Orbit)
+            Console.WriteLine();
+            Console.WriteLine("Posiciones a las que podría ir:");
+
+            int sectorSiguiente = (jugador.Sector + 1) % jugador.Sectores;
+            int sectorAnterior = (jugador.Sector - 1 + jugador.Sectores) % jugador.Sectores;
+
+            Console.WriteLine($"Adelante: ({(int)jugador.CalcularX(jugador.Carril, sectorSiguiente)}, {(int)jugador.CalcularY(jugador.Carril, sectorSiguiente)})");
+            Console.WriteLine($"Atrás:    ({(int)jugador.CalcularX(jugador.Carril, sectorAnterior)}, {(int)jugador.CalcularY(jugador.Carril, sectorAnterior)})");
+
+            if (jugador.Carril + 1 < jugador.Carriles)
+                Console.WriteLine($"Afuera:   ({(int)jugador.CalcularX(jugador.Carril + 1, jugador.Sector)}, {(int)jugador.CalcularY(jugador.Carril + 1, jugador.Sector)})");
+            else
+                Console.WriteLine("Afuera:   no hay más anillos");
+
+            if (jugador.Carril - 1 >= 0)
+                Console.WriteLine($"Adentro:  ({(int)jugador.CalcularX(jugador.Carril - 1, jugador.Sector)}, {(int)jugador.CalcularY(jugador.Carril - 1, jugador.Sector)})");
+            else
+                Console.WriteLine("Adentro:  no hay más anillos");
+
+            // Recorrido de prueba
+            Console.WriteLine();
+            Console.WriteLine("Recorrido:");
+
+            Mostrar("Adelante", jugador.MoverAdelante(muros), jugador);
+            Mostrar("Adelante", jugador.MoverAdelante(muros), jugador);   // choca con el muro del sector 2
+            Mostrar("Adentro", jugador.MoverAdentro(muros), jugador);     // lo esquiva pasando al anillo de adentro
+            Mostrar("Adelante", jugador.MoverAdelante(muros), jugador);
+            Mostrar("Afuera", jugador.MoverAfuera(muros), jugador);       // volver afuera en el sector 2 lo bloquea el muro
+            Mostrar("Adelante", jugador.MoverAdelante(muros), jugador);
+            Mostrar("Afuera", jugador.MoverAfuera(muros), jugador);       // ya pasó el muro: puede salir
+            Mostrar("Atrás", jugador.MoverAtras(muros), jugador);         // retroceder lo bloquea el muro
+            Mostrar("Afuera", jugador.MoverAfuera(muros), jugador);       // no hay un anillo más afuera
             Console.WriteLine();
 
 
-            
-            
-        // ==========================================
-        // GEMA DE ENERGÍA ESTÁNDAR
-        // ==========================================
+            // gemas del nucleo
 
-Console.WriteLine("***************************");
+            Console.WriteLine("---- Gemas del núcleo ----");
+
+            GemasDelNucleo amarilla = new GemasDelNucleo("Amarilla", 1, 30, 0, 0, jugador);
+            GemasDelNucleo azul = new GemasDelNucleo("Azul", 2, 30, 1, 1, jugador);
+            GemasDelNucleo roja = new GemasDelNucleo("Roja", 3, 40, 2, 2, jugador);
+
+            jugador.RecoleccionGemas(azul);       // fuera de orden: no se recoge
+            Console.WriteLine("Azul primero -> total de gemas: " + jugador.TotalGemas);
+
+            jugador.RecoleccionGemas(amarilla);
+            Console.WriteLine("Amarilla -> total de gemas: " + jugador.TotalGemas);
+
+            jugador.RecoleccionGemas(azul);
+            Console.WriteLine("Azul -> total de gemas: " + jugador.TotalGemas);
+
+            jugador.RecoleccionGemas(roja);
+            Console.WriteLine("Roja -> total de gemas: " + jugador.TotalGemas);
+            Console.WriteLine();
+
+
+
+            // ---------------------------------------------------------
+            // CÉLULA DE SOBRECARGA
+            // ---------------------------------------------------------
+            Console.WriteLine("---- Célula de sobrecarga ----");
+
+            Celula_Sobrecarga celula = new Celula_Sobrecarga("Energía potenciadora", 0, 0);
+
+            Console.WriteLine("Célula recogida: " + celula.RecolecciondeEnergia());
+            Console.WriteLine("Poder activado: " + celula.ActivarPoder());     // pregunta S/N y cuenta 10 segundos
+
+
+
+            GemasDelNucleo gemasDelNucleo = new GemasDelNucleo();
+
+            Console.WriteLine("--tiempo de sobrecarga de la celula");
+            gemasDelNucleo.IniciarTiempo();
+
+            gemasDelNucleo.SegundosCelula();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // ==========================================
+            // GEMA DE ENERGÍA ESTÁNDAR
+            // ==========================================
+
+            Console.WriteLine("***************************");
 Console.WriteLine("GEMA DE ENERGIA ESTANDAR");
 Console.WriteLine();
 
