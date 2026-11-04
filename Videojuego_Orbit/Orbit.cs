@@ -63,7 +63,7 @@ namespace VideoJuego_Orbit
             this.estado = 0;
             this.tiempoPorPartida = 60;
             this.velocidad = 10;
-            this.tiempocelula = 10;
+
 
             this.centroX = 0;
             this.centroY = 0;
